@@ -140,7 +140,7 @@ void parse_input(status *s, char c) {
     } else { // otherwise, append the c to our arg_string
       arg_string_append(s->arg_string, c); 
     }
-  } else { // not in escape mode
+  } else { // in escape mode
     if (c == ' ' || c == '&' || c == '\\') { // if we see these legal characters, we can append them exactly as is
       arg_string_append(s->arg_string, c);
     } else if (c == 't') { // else, if we see a t, then we need to append a tab character
