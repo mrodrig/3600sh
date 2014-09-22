@@ -1,7 +1,7 @@
 TODO:Remove this line. Replace <SHELL_NAME> with a name. challenges and testing sections.
 <SHELL_NAME>
 
-The <SHELL_NAME> shell, designed by Michael Rodriguez and Michael Chadbourne.
+The <SHELL_NAME> shell, designed by Michael Rodrigues and Michael Chadbourne.
 
 Design:
 The shell was designed to function around the information stored in a
