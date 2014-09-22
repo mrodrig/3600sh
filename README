@@ -1,0 +1,67 @@
+TODO:Remove this line. Replace <SHELL_NAME> with a name. challenges and testing sections.
+<SHELL_NAME>
+
+The <SHELL_NAME> shell, designed by Michael Rodriguez and Michael Chadbourne.
+
+Design:
+The shell was designed to function around the information stored in a
+proprietary data structure called the 'status_s' which is described below
+in the Data_Structures section. In this way multiple states could be stored
+as multiple instances of the status structure, each containing a context for
+the shell.
+
+The shell then works with the status to determine what to do. Calling for
+execution, IO or the parser depending on the variables saved inside the
+shell's active state.
+
+Challenges:
+
+TODO: this
+
+Features:
+<SHELL_NAME> works as a command line shell, printing a prompt which allows
+input. <SHELL_NAME> is able to accept any number of arguments when accepting
+input and based upon those arguments can:
+	
+Run a program from the file's directory, as a standard or background process. 
+Handle escape characters according to UNIX standards.
+Redirect input, output and errors according to UNIX standards.
+And can exit with the “exit” command.
+
+
+Data Structures:
+Argument Array – The argument array holds an array of strings, and the size
+of the array.
+
+struct arg_array_s{
+	int len; 	//The Size of the array
+	char **emnts;	//The array of strings
+}
+
+Argument String – Used to qualify incoming arguments. Contains a single string
+and the character length of that string.
+
+struct arg_string_s {
+	int len;		//The length of the string
+	char *str;	//The String
+}
+
+Status – The various conditions and states a shell can be in, stored together 
+represent  the variables in a single occurrence of the shell.
+
+struct status_s {
+	int parse_mode;	//Is the shell parsing?
+	int escape_mode;	//Is the shell reading an escape character?
+	int bg_proc;		//
+	int redirect_type;	//What type of file redirect is the shell reading?
+	int io_redirected;	//Is the shell redirecting IO?
+	int status_code;	//
+	int eof_hit;		//Has the shell reached the End of File?
+	arg_array *argv;	//The Incoming arguments to the shell
+	arg_string *arg_string;	//
+	char *fds[3];		//
+}
+
+Internal Testing:
+
+TODO: this
