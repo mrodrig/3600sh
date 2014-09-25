@@ -15,8 +15,21 @@ execution, IO or the parser depending on the variables saved inside the
 shell's active state.
 
 Challenges:
-
-TODO: this
+Some of the main challenges that were faced during this project were encountered
+during the development of the read_and_parse() and the execute_cmd(status *s)
+functions.  In particular, the read_and_parse() function was initially very
+difficult to reason about regarding how to retrieve input (initially using
+readline), and later converting to getchar(). Using readline, the parser
+started to support only specific cases and ultimately was thrown away.  Upon
+converting to getchar(), the implementation of the parsing functionality became
+more apparent and easier to reason about.  Utilizing mode/flag variables, we
+were able to stop parsing data once we received bad input and therefore
+making handling errors and escape characters signficantly easier than before.
+The execute_cmd(status *s) function also posed some challenges.  In particular,
+setting up IO redirection was tricky at first and we were only able to
+perform this in the parent process, until it was covered conceptually in
+class. Overall, we were able to overcome the challenges that we faced in this
+project and were able to pass all provided tests.
 
 Features:
 <SHELL_NAME> works as a command line shell, printing a prompt which allows
@@ -34,7 +47,7 @@ Argument Array – The argument array holds an array of strings, and the size
 of the array.
 
 struct arg_array_s{
-	int len; 	//The Size of the array
+	int len; 	//The size of the array
 	char **emnts;	//The array of strings
 }
 
@@ -42,7 +55,7 @@ Argument String – Used to qualify incoming arguments. Contains a single string
 and the character length of that string.
 
 struct arg_string_s {
-	int len;		//The length of the string
+	int len;	//The length of the string
 	char *str;	//The String
 }
 
@@ -52,16 +65,27 @@ represent  the variables in a single occurrence of the shell.
 struct status_s {
 	int parse_mode;	//Is the shell parsing?
 	int escape_mode;	//Is the shell reading an escape character?
-	int bg_proc;		//
+	int bg_proc;		//Is this process a background process?
 	int redirect_type;	//What type of file redirect is the shell reading?
 	int io_redirected;	//Is the shell redirecting IO?
-	int status_code;	//
+	int status_code;	//If there was an error, which one?
 	int eof_hit;		//Has the shell reached the End of File?
 	arg_array *argv;	//The Incoming arguments to the shell
-	arg_string *arg_string;	//
-	char *fds[3];		//
+	arg_string *arg_string;	//Data struct containing the current argument
+	char *fds[3];		//File descriptors for IO redirection
 }
 
 Internal Testing:
-
-TODO: this
+In addition to testing all changes via the provided test script, our shell
+was also tested in multiple ways. One of way was through starting the
+shell and just trying various commands in one terminal.  In another
+terminal, we ran the same input on the reference shell so as to better
+understand the specific behavior that was expected of our shell.  In
+addition, there were many occassions where a bug caused unexpected
+behavior.  When this occurred, some additional testing was performed via
+gdb to identify what was occurring and where. Upon passing all
+provided tests, additional tests were added to the test script.
+To further ensure that our shell was performing correctly, the program
+was checked for memory leaks using 'valgrind --leak-check=yes ./3600sh'.
+This identified a few issues that were promptly addressed so that the
+program now has no memory leaks that valgrind can identify.
