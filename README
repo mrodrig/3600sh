@@ -1,7 +1,6 @@
-TODO:Remove this line. Replace <SHELL_NAME> with a name. challenges and testing sections.
-<SHELL_NAME>
+CMSH: Chadbourn Mrodrig SHell
 
-The <SHELL_NAME> shell, designed by Michael Rodrigues and Michael Chadbourne.
+The CMSH shell, was designed by Michael Rodrigues and Michael Chadbourne.
 
 Design:
 The shell was designed to function around the information stored in a
@@ -32,8 +31,8 @@ class. Overall, we were able to overcome the challenges that we faced in this
 project and were able to pass all provided tests.
 
 Features:
-<SHELL_NAME> works as a command line shell, printing a prompt which allows
-input. <SHELL_NAME> is able to accept any number of arguments when accepting
+CMSH works as a command line shell, printing a prompt which allows
+input. CMSH is able to accept any number of arguments when accepting
 input and based upon those arguments can:
 	
 Run a program from the file's directory, as a standard or background process. 
@@ -44,7 +43,9 @@ And can exit with the “exit” command.
 
 Data Structures:
 Argument Array – The argument array holds an array of strings, and the size
-of the array.
+of the array. This structure has specific functions which are called to add
+data to the internal representation so that memory can be allocated as it is
+needed.
 
 struct arg_array_s{
 	int len; 	//The size of the array
@@ -52,7 +53,9 @@ struct arg_array_s{
 }
 
 Argument String – Used to qualify incoming arguments. Contains a single string
-and the character length of that string.
+and the character length of that string. This structure also has specific
+functions which are called to add data to the internal representation so that
+memory can be allocated as it is needed.
 
 struct arg_string_s {
 	int len;	//The length of the string
